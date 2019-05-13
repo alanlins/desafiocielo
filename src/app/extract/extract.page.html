@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Extrato
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div *ngIf="lancamentoContaLegado === null || lancamentoContaLegado === undefined" padding>Não foram encontrados lançamentos</div>
+
+    <ion-grid *ngIf="lancamentoContaLegado !== null && lancamentoContaLegado !== undefined">
+      <ion-row>
+        <ion-col align-self-center>
+          Data do lançamento
+        </ion-col>
+        <ion-col align-self-center>
+          Descrição
+        </ion-col>
+        <ion-col align-self-center>
+          Número
+        </ion-col>
+        <ion-col align-self-center>
+          Situação
+        </ion-col>
+        <ion-col align-self-center>
+          Data de confirmação
+        </ion-col>
+        <ion-col align-self-center>
+          Dados bancários
+        </ion-col>
+        <ion-col align-self-center>
+          Valor final
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let controleLancamento of listaControleLancamento">
+        <ion-col>
+          {{ controleLancamento.dataLancamentoContaCorrenteCliente }}
+        </ion-col>
+        <ion-col>
+          {{ controleLancamento.lancamentoContaCorrenteCliente.nomeTipoOperacao }}
+        </ion-col>
+        <ion-col>
+          {{ controleLancamento.lancamentoContaCorrenteCliente.numeroRemessaBanco }}
+        </ion-col>
+        <ion-col>
+          {{ controleLancamento.lancamentoContaCorrenteCliente.nomeSituacaoRemessa }}
+        </ion-col>
+        <ion-col>
+          {{ controleLancamento.dataEfetivaLancamento }}
+        </ion-col>
+        <ion-col>
+          {{ controleLancamento.nomeBanco.trim() }} 
+          Ag {{ +controleLancamento.lancamentoContaCorrenteCliente.dadosDomicilioBancario.numeroAgencia }} 
+          CC {{ +controleLancamento.lancamentoContaCorrenteCliente.dadosDomicilioBancario.numeroContaCorrente }}
+        </ion-col>
+        <ion-col>
+          R$ {{ controleLancamento.valorLancamentoRemessa }}
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+</ion-content>
